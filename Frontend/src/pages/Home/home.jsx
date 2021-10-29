@@ -3,9 +3,89 @@ import { Redirect } from "react-router-dom";
 import React, { useState } from "react";
 import { ReactComponent as Logo } from '../../assets/svgs/logo.svg'
 
-
 function Home() {
+  const [diaSelecionado,setDiaSelecionado] = useState()
+  const [novoItem,setNovoItem] = useState()
+  const [dias,setDias] = useState([
+    {
+      dia:1,
+      anotacoes:[""],
+    },
+    {
+      dia:2,
+      anotacoes:[""],
+    },
+    {
+      dia:3,
+      anotacoes:[""],
+    },
+    {
+      dia:4,
+      anotacoes:[""],
+    },
+    {
+      dia:5,
+      anotacoes:[""],
+    },
+    {
+      dia:6,
+      anotacoes:[""],
+    },
+    {
+      dia:7,
+      anotacoes:[""],
+    },
+    {
+      dia:8,
+      anotacoes:[""],
+    },
+    {
+      dia:9,
+      anotacoes:[""],
+    },
+    {
+      dia:10,
+      anotacoes:[""],
+    },
+    {
+      dia:11,
+      anotacoes:[""],
+    },
+    {
+      dia:12,
+      anotacoes:[""],
+    },
+    {
+      dia:13,
+      anotacoes:[""],
+    },
+    {
+      dia:14,
+      anotacoes:[""],
+    },
 
+  ]);
+  const [diaObj, setDiaObj] = useState()
+  const defineDiaObj = (e) => {
+    localStorage.setItem('diaSelecionado', e.dia)
+    console.log(localStorage.getItem('diaSelecionado'));
+    dias.map((e) => {
+      if(e.dia == localStorage.getItem('diaSelecionado')) {
+        localStorage.setItem('diaObj', JSON.stringify(e));
+        setDiaObj(e)
+      }
+    })
+  }
+  const adicionaItem = () => {
+    var diaAux = JSON.parse(localStorage.getItem('diaObj'))
+    diaAux.anotacoes = novoItem;
+    localStorage.setItem('diaObj', JSON.stringify(diaAux))
+    dias.map((e) => {
+      if(e.dia == localStorage.getItem('diaSelecionado')) {
+        e.anotacoes = novoItem
+        console.log(dias);
+      }
+  })}
   const userLogado = localStorage.getItem("logado");
   if (userLogado === false || userLogado == null) {
     return <Redirect to="/" />;
@@ -37,36 +117,32 @@ function Home() {
             <li>Sábado</li>
           </ul>
           <div className="gridContainer">
-            <div className="gridItem">
-              <div className="molduraText">
-                <p>01</p>
-                <p>:</p>
+            {dias.map((e) => {
+              return (
+                <div onClick={ () => {defineDiaObj(e)}} className="gridItem">
+                <div className="molduraText">
+                  <p>{e.dia}</p>
+                  <p>:</p>
+                </div>
               </div>
-            </div>
-            <div className="gridItem">
-              <div className="molduraText">
-                <p>02</p>
-                <p>:</p>
-              </div>
-            </div>
-            <div className="gridItem">
-              <div className="molduraText">
-                <p>03</p>
-                <p>:</p>
-              </div>
-            </div>
-            <div className="gridItem">
-              <div className="molduraText">
-                <p>04</p>
-                <p>:</p>
-              </div>
-            </div>
-            <div className="gridItem">
-              <div className="molduraText">
-                <p>05</p>
-                <p>:</p>
-              </div>
-            </div>
+              );
+            })}
+            
+          </div>
+        </div>
+        
+        <div className="popUp">
+          <div>
+
+          </div>
+          <p>Tarefas para o </p>
+          <div>
+            <p></p>
+            <form>
+            <input onChange={(e) => {setNovoItem(e.target.value);console.log(e.target.value);}} placeholder="Insira um novo item"></input>
+            <input onChange={(e) => {setNovoItem(e.target.value);console.log(e.target.value);}} placeholder="Insira a data de entrega"></input>
+            <p onClick={() => {adicionaItem()}}>Adicionar Item</p>
+            </form>
           </div>
         </div>
       </main>
