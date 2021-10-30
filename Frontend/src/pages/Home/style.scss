@@ -91,7 +91,7 @@ header {
     overflow-y: scroll;
   }
 .gridItem {
-    background-image: url('../../assets/svgs/Orange.svg');
+    background-image: url('../../assets/svgs/cor6.svg');
     background-position: center;
     background-size: cover;
     border-radius: 1rem;
@@ -126,6 +126,8 @@ header {
     border-radius:1rem;
 }
 .formAtividade {
+    position:relative;
+    bottom: 0;
     display: flex;
     align-self: flex-end;
     vertical-align: bottom  ;

@@ -26,12 +26,17 @@ function Login() {
   }
 
   return (
-    <div className="perfilMain">
-      <div className="perfil">
+    <div className="loginMain">
+      <div className="DoSchool">
+        
+        <div className="logo logoPerfil"></div>
+        <h1 className="Sobre"> Uma ferramenta fácil e intuitiva <br></br> para organização pessoal.</h1>
+      </div>
+      <div className="login">
         <form className="loginForm">
           <input
             name="usuario"
-            className="loginInput"
+            className="inputLogin"
             onChange={(e) => {
               user.nome = e.target.value;
             }}
@@ -39,17 +44,17 @@ function Login() {
           ></input>
           <input
             name="senha"
-            className="loginInput"
+            className="inputLogin"
             onChange={(e) => {
               user.senhaHash = e.target.value;
             }}
             type="password"
             placeholder="Senha"
           ></input>
-          <p onClick={handleLogin} className="login_entrar">
+          <p onClick={handleLogin} className="buttonLogin">
             Entrar
           </p>
-          <Link to="/cadastro" className="cadastro">
+          <Link to="/cadastro" className="buttonCadastro">
             Cadastre-se
           </Link>
           <Snackbar open={msgTrigger} autoHideDuration={2000} onClose={() => {setMsgTrigger(false)}}>

@@ -88,7 +88,6 @@ function Home() {
   const defineDiaObj = (e) => {
     dias.map((event) => {
       if(event.dia == e.dia) {
-        console.log(event);
         localStorage.setItem('diaObj', JSON.stringify(event));
         setDiaObj(event)
       }
@@ -117,14 +116,12 @@ function Home() {
     localStorage.setItem('diaObj', JSON.stringify(diaAux))
     dias.map((e) => {
       if(e.dia == diaAux.dia) {
-        console.log("entro");
         e.anotacoes.push(novaAnotacao);
         setNovaAnotacao({
           nome: "",
           data: 0
         })
         localStorage.setItem('dias', JSON.stringify(dias))
-        console.log(dias);
       }
   })}
   const removerItem = (e) => {
@@ -138,12 +135,9 @@ function Home() {
         localStorage.setItem('dias', JSON.stringify(dias))
       }
   })
-    console.log(dias);
-    console.log(localStorage.getItem('dias'))
   }
   const userLogado = JSON.parse(localStorage.getItem("userLogado"));
   if (userLogado === false || userLogado == null) {
-    console.log(userLogado);
     return <Redirect to="/" />;
   }
   return (
@@ -172,8 +166,12 @@ function Home() {
           </ul>
           <div className="gridContainer">
             {dias.map((e) => {
+              if(e.dia%2 == 0) {
+                console.log("par");
+                // style={{backgroundImage = url('../../assets/svgs/Orange.svg')}}
+              }
               return (
-                <div onClick={ () => {defineDiaObj(e);setButtonPopup(true)}} className="gridItem">
+                <div style={{ backgroundImage: `url(require("../../assets/svgs/cor1.svg"))` }} onClick={ () => {defineDiaObj(e);setButtonPopup(true)}} className="gridItem">
                   <div className="molduraText">
                     <p>{e.dia}</p>
                     <p>:</p>
@@ -201,8 +199,8 @@ function Home() {
             );
           })}
           <form className="formAtividade">
+          <input data-input2 onChange={(e) => {novaAnotacao.data = e.target.value}} placeholder="Insira o horário"></input>
           <input data-input1 onChange={(e) => {novaAnotacao.nome = e.target.value}} placeholder="Insira um novo item"></input>
-          <input data-input2 onChange={(e) => {novaAnotacao.data = e.target.value}} placeholder="Insira a data de entrega"></input>
           <p className="button" onClick={() => {adicionaItem();}}>Adicionar Item</p>
           </form>
         </Popup>
