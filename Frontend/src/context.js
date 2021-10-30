@@ -14,6 +14,7 @@ export const ContextProvider = ({ children }) => {
   const [severity, setSeverity] = useState("");
   const [mensagem, setMensagem] = useState("");
 
+
   const handleCadastro = async (e) => {
     e.preventDefault();
     if (user.nome.length <= 2) {
@@ -42,8 +43,70 @@ export const ContextProvider = ({ children }) => {
       const res = await api.post("/login", user);
       localStorage.setItem("token", res?.data?.token);
       localStorage.setItem("usuario", JSON.stringify(res?.data?.user[0]));
-      localStorage.setItem("carrinho", JSON.stringify([]));
-      localStorage.setItem("total", JSON.stringify(0));
+      localStorage.setItem("userLogado", true)
+      localStorage.setItem('diaObj', JSON.stringify({
+        anotacoes: [],
+        dia: 0
+      }));
+      localStorage.setItem('dias',JSON.stringify([
+        {
+          dia: 1,
+          anotacoes: [],
+        },
+        {
+          dia: 2,
+          anotacoes: [],
+        },
+        {
+          dia: 3,
+          anotacoes: [],
+        },
+        {
+          dia: 4,
+          anotacoes: [],
+        },
+        {
+          dia: 5,
+          anotacoes: [],
+        },
+        {
+          dia: 6,
+          anotacoes: [],
+        },
+        {
+          dia: 7,
+          anotacoes: [],
+        },
+        {
+          dia: 8,
+          anotacoes: [],
+        },
+        {
+          dia: 9,
+          anotacoes: [],
+        },
+        {
+          dia: 10,
+          anotacoes: [],
+        },
+        {
+          dia: 11,
+          anotacoes: [],
+        },
+        {
+          dia: 12,
+          anotacoes: [],
+        },
+        {
+          dia: 13,
+          anotacoes: [],
+        },
+        {
+          dia: 14,
+          anotacoes: [],
+        },
+
+      ]))
       setDeslogado(false);
       setLogado(true);
     } catch (err) {
@@ -63,7 +126,7 @@ export const ContextProvider = ({ children }) => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  
+
   const mostraMensagem = (mensagem, severity) => {
     setMensagem(mensagem);
     setMsgTrigger(true);
@@ -73,7 +136,7 @@ export const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        logado, 
+        logado,
         setLogado,
         deslogado,
         setDeslogado,

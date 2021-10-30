@@ -26,9 +26,8 @@ function Login() {
   }
 
   return (
-    <div className="login_body">
-      <div className="login_main">
-        <h1 className="login_title"> iVegan </h1>
+    <div className="perfilMain">
+      <div className="perfil">
         <form className="loginForm">
           <input
             name="usuario"
