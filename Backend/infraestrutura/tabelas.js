@@ -15,6 +15,17 @@ class Tabelas {
             }
         })
     }
+
+    criarAnotacoes() {
+        const sql = 'CREATE TABLE IF NOT EXISTS anotacoes (id INTEGER PRIMARY KEY AUTO_INCREMENT, array VARCHAR(500) NOT NULL UNIQUE, userName NOT NULL UNIQUE)'
+        this.conexao.query(sql, erro => {
+            if(erro) {
+                console.log(erro)
+            } else {
+                console.log('Tabela Usuarios criada com sucesso')
+            }
+        })
+    }
 }
 
 module.exports = new Tabelas

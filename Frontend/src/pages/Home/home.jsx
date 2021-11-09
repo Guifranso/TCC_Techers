@@ -7,6 +7,7 @@ import Popup from '../../Components/Popup/popup'
 import { useContext } from "react";
 import { Context } from "../../context"
 import { Snackbar } from "@mui/material";
+import api from "../../services/api";
 
 function Home() {
   const {
@@ -24,65 +25,6 @@ function Home() {
     data: 0
   })
   const [dias,setDias] = useState(JSON.parse(localStorage.getItem('dias')));
-  // const [dias,setDias] = useState([
-  //   {
-  //     dia:1,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:2,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:3,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:4,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:5,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:6,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:7,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:8,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:9,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:10,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:11,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:12,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:13,
-  //     anotacoes:[],
-  //   },
-  //   {
-  //     dia:14,
-  //     anotacoes:[],
-  //   },
-
-  // ]);
   const [diaObj, setDiaObj] = useState(JSON.parse(localStorage.getItem('diaObj')))
 
   const defineDiaObj = (e) => {
@@ -123,7 +65,9 @@ function Home() {
         })
         localStorage.setItem('dias', JSON.stringify(dias))
       }
-  })}
+  })
+    // atualizaNoBanco();
+  }
   const removerItem = (e) => {
     let diaObjAux = JSON.parse(localStorage.getItem('diaObj'));
     diaObjAux.anotacoes = diaObjAux.anotacoes.filter((d) => d.nome !== e.nome)
@@ -136,6 +80,22 @@ function Home() {
       }
   })
   }
+  // const atualizaNoBanco = async () => {
+  //   console.log(JSON.parse(localStorage.getItem('usuario')).nome); 
+  //   console.log(JSON.stringify(localStorage.getItem('dias')));
+  //   var anotacoes = {
+  //     array : JSON.stringify(localStorage.getItem('dias')),
+  //     userName : JSON.parse(localStorage.getItem('usuario')).nome
+  //   }
+  //   try {
+  //     const res = await api.post("/registrarAnotacoes", anotacoes);
+  //   } catch (err) {
+  //     setMensagem("Valores inválidos");
+  //     setSeverity("error");
+  //     setMsgTrigger(true);
+  //     console.log(err);
+  //   }
+  // }
   const userLogado = JSON.parse(localStorage.getItem("userLogado"));
   if (userLogado === false || userLogado == null) {
     return <Redirect to="/" />;

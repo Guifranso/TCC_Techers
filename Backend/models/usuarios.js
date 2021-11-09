@@ -22,7 +22,6 @@ class Usuario {
       usuario.nome
     )}"`;
     conexao.query(sql, usuario, async (erro, resultados) => {
-      console.log(sql);
       const senhaValida = await bcrypt.compare(
         usuario.senhaHash,
         resultados[0].senhaHash
@@ -79,42 +78,3 @@ class Usuario {
 }
 
 module.exports = new Usuario();
-
-//Rotas q eu nao estou usando
-
-// buscaPorId(id, res) {
-//   const sql = `SELECT * FROM Usuarios WHERE id=${id}`;
-
-//   conexao.query(sql, (erro, resultados) => {
-//     const usuario = resultados[0];
-//     if (erro) {
-//       res.status(400).json(erro);
-//     } else {
-//       res.status(200).json(usuario);
-//     }
-//   });
-// }
-
-// altera(id, valores, res) {
-//   const sql = "UPDATE Atendimentos SET ? WHERE id=?";
-
-//   conexao.query(sql, [valores, id], (erro, resultados) => {
-//     if (erro) {
-//       res.status(400).json(erro);
-//     } else {
-//       res.status(200).json({ ...valores, id });
-//     }
-//   });
-// }
-
-// deleta(id, res) {
-//   const sql = "DELETE FROM Usuarios WHERE id=?";
-
-//   conexao.query(sql, id, (erro, resultados) => {
-//     if (erro) {
-//       res.status(400).json(erro);
-//     } else {
-//       res.status(200).json({ id });
-//     }
-//   });
-// }

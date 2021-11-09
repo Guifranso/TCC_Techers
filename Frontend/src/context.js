@@ -25,9 +25,7 @@ export const ContextProvider = ({ children }) => {
       mostraMensagem("Insira uma senha maior", "warning")
     } else {
       try {
-        const res = await api.post("/usuarios", user);
-        localStorage.setItem("usuario", JSON.stringify(res.data[0]));
-        localStorage.setItem("carrinho", JSON.stringify([]));
+        const res = await api.post("/registrarUsuario", user);
         handleLogin();
       } catch (err) {
         setMensagem("Valores inválidos");
